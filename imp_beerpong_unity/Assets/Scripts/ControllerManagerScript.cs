@@ -7,7 +7,11 @@ public class ControllerManagerScript : MonoBehaviour {
     public GameObject ball;
 	public GameObject pointer;
 
+	public Rigidbody rb;
+
 	private bool pickedUp = false;
+
+	public Vector3 force;
  
     void Start () {
     }
@@ -15,7 +19,7 @@ public class ControllerManagerScript : MonoBehaviour {
     void Update () {
  
         if (GvrController.ClickButton) {
-			BallInHand();
+			PickUp();
 			pickedUp = true;
 		}
 		if (!GvrController.ClickButton && pickedUp){
@@ -26,13 +30,16 @@ public class ControllerManagerScript : MonoBehaviour {
     }
  
     void ThrowBall () {
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
-		rb.AddForce(ball.transform.forward * 500);
+		rb = ball.GetComponent<Rigidbody>();
+		force = ball.transform.forward * 0.6f;
+		rb.AddForce(force);
     }
 
-	void BallInHand() {
+	void PickUp() {
+		rb = ball.GetComponent<Rigidbody>();
+		rb.velocity = new Vector3(0f, 0f, 0f);
 		Vector3 pos = pointer.transform.position;
-		Quaternion rot = pointer.transform.rotation;
+		Quaternion rot = Quaternion.identity;
 		ball.transform.SetPositionAndRotation (pos, rot);
 	}
 }
