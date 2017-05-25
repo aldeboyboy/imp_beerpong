@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColliderTriggerScript : MonoBehaviour {
 
 	int points;
+	public Text score;
 
 	// Use this for initialization
 	void Start () {
 		points = 0;
+		score.text = "Score: " + points.ToString();
 	}
 	
 	// Update is called once per frame
@@ -21,6 +24,7 @@ public class ColliderTriggerScript : MonoBehaviour {
 		Destroy (cup);
 		Destroy (collider);
 		points += 1;
+		score.text = "Score: " + points.ToString();
 		Debug.Log (points);
 	}
 }
