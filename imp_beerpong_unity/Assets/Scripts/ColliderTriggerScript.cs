@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ColliderTriggerScript : MonoBehaviour {
 
-	int pointsRed;
-	int pointsBlue;
+	public int pointsRed;
+	public int pointsBlue;
 	public Text score;
 	public Image overlay;
 	public ControllerManagerScript controllerManagerScript;
@@ -19,7 +19,7 @@ public class ColliderTriggerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//score.text = controllerManagerScript.timer.ToString();
+		//score.text = controllerManagerScript.throwTimer.ToString();
 	}
 
 	void OnTriggerEnter(Collider collider) {
@@ -28,7 +28,7 @@ public class ColliderTriggerScript : MonoBehaviour {
 		Destroy (cup);
 		Destroy (collider);
 		pointsBlue += 1;
-		//score.text = controllerManagerScript.timer.ToString();
+		//score.text = controllerManagerScript.throwTimer.ToString();
 		Debug.Log (pointsBlue);
 	}
 
@@ -36,7 +36,7 @@ public class ColliderTriggerScript : MonoBehaviour {
 		//score.text = "Test";
 		overlay.CrossFadeAlpha(255.0f, 1.0f, false);
 		float p = Random.value;
-		if (p < 0.1) {
+		if (p < 1) {
 			DestroyCup();
 		}
 	}

@@ -10,29 +10,46 @@ public class ControllerManagerScript : MonoBehaviour {
 	private bool pickedUp = false;
 	public Vector3 force;
   public ColliderTriggerScript colliderTriggerScript;
+  public float startTime;
   public float time;
-  public float timer;
-  public bool timerStarted;
+  public float throwTimer;
+  public bool isThrown;
+  public float shake;
+  public float shakeTimer;
+  public CameraShake cameraShake;
 
   void Start () {
+    if (colliderTriggerScript.pointsRed > 0) {
+      shake = Random.Range(1, ((1/colliderTriggerScript.pointsRed) * 40));
+    }
+    startTime = Time.time;
+
   }
 
   void Update () {
+    shakeTimer = Time.time - startTime;
+    if (colliderTriggerScript.pointsRed > 0) {
+      if (shakeTimer >= shake) {
+        startTime = Time.time;
+        shake = Random.Range(1, 4);;
+        cameraShake.shakeDuration = 0.5f;
+      }
+    }
 
-    colliderTriggerScript.score.text = "pickedUp: " + pickedUp + " timerStarted: " + timerStarted;
+    colliderTriggerScript.score.text = "pickedUp: " + pickedUp + " isThrown: " + isThrown;
 
-    if(timerStarted) {
-      timer = Time.time - time;
+    if(isThrown) {
+      throwTimer = Time.time - time;
 
-      if(timer >= 5.0f) {
+      if(throwTimer >= 5.0f) {
         colliderTriggerScript.enemyThrow();
         time = Time.time;
-        timerStarted = false;
+        isThrown = false;
       }
     }
 
     if (GvrController.ClickButton) {
-      if (!(timerStarted)) {
+      if (!(isThrown)) {
         PickUp();
   			pickedUp = true;
       }
@@ -41,13 +58,13 @@ public class ControllerManagerScript : MonoBehaviour {
 		if (!GvrController.ClickButton && pickedUp){
       ThrowBall();
       time = Time.time;
-      timerStarted = true;
+      isThrown = true;
 			pickedUp = false;
 		}
   }
 
   /* void startTimer(Time time) {
-    float timer = Time.time - time;
+    float throwTimer = Time.time - time;
   } */
 
   void ThrowBall () {
