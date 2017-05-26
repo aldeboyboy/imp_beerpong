@@ -1,39 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
- 
+
 public class ControllerManagerScript : MonoBehaviour {
- 
-    public GameObject ball;
+
+  public GameObject ball;
 	public GameObject pointer;
-
 	public Rigidbody rb;
-
 	private bool pickedUp = false;
-
 	public Vector3 force;
- 
-    void Start () {
+  public ColliderTriggerScript script;
+  public float time;
+  public float timer;
+  public bool timerStarted;
+
+  void Start () {
+  }
+
+  void Update () {
+
+    if(timerStarted) {
+      timer = Time.time - time;
     }
- 
-    void Update () {
- 
-        if (GvrController.ClickButton) {
+    if (GvrController.ClickButton) {
 			PickUp();
 			pickedUp = true;
 		}
+
 		if (!GvrController.ClickButton && pickedUp){
-            ThrowBall ();
+      ThrowBall();
+      time = Time.time;
+      timerStarted = true;
 			pickedUp = false;
 		}
- 
+
+    if(timer >= 10.0f) {
+      script.enemyThrow();
+      timer = 0.0f;
     }
- 
-    void ThrowBall () {
+  }
+
+  /* void startTimer(Time time) {
+    float timer = Time.time - time;
+  } */
+
+  void ThrowBall () {
 		rb = ball.GetComponent<Rigidbody>();
 		force = ball.transform.forward * 0.6f;
 		rb.AddForce(force);
-    }
+  }
 
 	void PickUp() {
 		rb = ball.GetComponent<Rigidbody>();

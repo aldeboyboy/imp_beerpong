@@ -8,6 +8,7 @@ public class ColliderTriggerScript : MonoBehaviour {
 	int pointsRed;
 	int pointsBlue;
 	public Text score;
+	public Image overlay;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,7 @@ public class ColliderTriggerScript : MonoBehaviour {
 		pointsRed = 0;
 		score.text = "Score: " + pointsBlue.ToString();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	}
@@ -28,6 +29,14 @@ public class ColliderTriggerScript : MonoBehaviour {
 		pointsBlue += 1;
 		score.text = "Score: " + pointsBlue.ToString();
 		Debug.Log (pointsBlue);
+	}
+
+	public void enemyThrow() {
+		overlay.CrossFadeAlpha(255.0f, 1.0f, false);
+		float p = Random.value;
+		if (p < 0.1) {
+			DestroyCup();
+		}
 	}
 
 	void DestroyCup() {
