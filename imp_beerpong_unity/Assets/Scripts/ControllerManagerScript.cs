@@ -9,7 +9,7 @@ public class ControllerManagerScript : MonoBehaviour {
 	public Rigidbody rb;
 	private bool pickedUp = false;
 	public Vector3 force;
-  public ColliderTriggerScript script;
+  public ColliderTriggerScript colliderTriggerScript;
   public float time;
   public float timer;
   public bool timerStarted;
@@ -19,12 +19,23 @@ public class ControllerManagerScript : MonoBehaviour {
 
   void Update () {
 
+    colliderTriggerScript.score.text = "pickedUp: " + pickedUp + " timerStarted: " + timerStarted;
+
     if(timerStarted) {
       timer = Time.time - time;
+
+      if(timer >= 5.0f) {
+        colliderTriggerScript.enemyThrow();
+        time = Time.time;
+        timerStarted = false;
+      }
     }
+
     if (GvrController.ClickButton) {
-			PickUp();
-			pickedUp = true;
+      if (!(timerStarted)) {
+        PickUp();
+  			pickedUp = true;
+      }
 		}
 
 		if (!GvrController.ClickButton && pickedUp){
@@ -33,11 +44,6 @@ public class ControllerManagerScript : MonoBehaviour {
       timerStarted = true;
 			pickedUp = false;
 		}
-
-    if(timer >= 10.0f) {
-      script.enemyThrow();
-      timer = 0.0f;
-    }
   }
 
   /* void startTimer(Time time) {
