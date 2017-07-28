@@ -19,8 +19,8 @@ public class ControllerManagerScript : MonoBehaviour {
   public CameraShake cameraShake;
 
   void Start () {
-    if (colliderTriggerScript.pointsRed > 0) {
-      shake = Random.Range(1, ((1/colliderTriggerScript.pointsRed) * 40));
+    if (colliderTriggerScript.pointsEnemy > 0) {
+      shake = Random.Range(1, ((1/colliderTriggerScript.pointsEnemy) * 40));
     }
     startTime = Time.time;
 
@@ -28,7 +28,7 @@ public class ControllerManagerScript : MonoBehaviour {
 
   void Update () {
     shakeTimer = Time.time - startTime;
-    if (colliderTriggerScript.pointsRed > 0) {
+    if (colliderTriggerScript.pointsEnemy > 0) {
       if (shakeTimer >= shake) {
         startTime = Time.time;
         shake = Random.Range(1, 4);;
@@ -36,7 +36,7 @@ public class ControllerManagerScript : MonoBehaviour {
       }
     }
 
-    colliderTriggerScript.score.text = "pickedUp: " + pickedUp + " isThrown: " + isThrown;
+    // colliderTriggerScript.score.text = "pickedUp: " + pickedUp + " isThrown: " + isThrown;
 
     if(isThrown) {
       throwTimer = Time.time - time;
