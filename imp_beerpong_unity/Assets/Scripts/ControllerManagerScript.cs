@@ -17,6 +17,7 @@ public class ControllerManagerScript : MonoBehaviour {
   public float shake;
   public float shakeTimer;
   public CameraShake cameraShake;
+  public Text ui;
 
   void Start () {
     if (colliderTriggerScript.pointsEnemy > 0) {
@@ -40,6 +41,10 @@ public class ControllerManagerScript : MonoBehaviour {
 
     if(isThrown) {
       throwTimer = Time.time - time;
+
+      if(throwTimer >= 1.0f) {
+        colliderTriggerScript.ui.text = "Opponent is throwing…";
+      }
 
       if(throwTimer >= 5.0f) {
         colliderTriggerScript.enemyThrow();

@@ -7,17 +7,15 @@ public class ColliderTriggerScript : MonoBehaviour {
 
 	public int pointsEnemy;
 	public int pointsPlayer;
-	public Text score;
+	public Text ui;
 	public ControllerManagerScript controllerManagerScript;
 	public GameObject menu;
-	public Image overlay;
 	public GameObject cups_red;
 	public GameObject cups_blue;
 
 	// Use this for initialization
 	void Start () {
 		startGame();
-		enemyThrow();
 	}
 
 	// Update is called once per frame
@@ -25,11 +23,11 @@ public class ColliderTriggerScript : MonoBehaviour {
 		if (pointsPlayer > 9 || pointsEnemy > 9) {
 			gameOver();
 		}
-		//score.text = controllerManagerScript.throwTimer.ToString();
 	}
 
 	void startGame() {
 		menu.SetActive(false);
+		ui.text = "It's your turn. Press button to pick up ball & release it to throw.";
 		pointsPlayer = 0;
 		pointsEnemy = 0;
 		Destroy(GameObject.Find("cups_red"));
@@ -46,17 +44,15 @@ public class ColliderTriggerScript : MonoBehaviour {
 		Destroy (cup);
 		Destroy (collider);
 		pointsPlayer += 1;
-		//score.text = controllerManagerScript.throwTimer.ToString();
-		// Debug.Log (pointsPlayer);
 	}
 
 	public void enemyThrow() {
-		//score.text = "Test";
-		overlay.CrossFadeAlpha(255.0f, 1.0f, false);
+		ui.text = "Enemy is throwing…";
 		float p = Random.value;
 		if (p < 0.4) {
 			DestroyCup();
 		}
+		ui.text = "It's your turn. Press button to pick up ball & release it to throw.";
 	}
 
 	void DestroyCup() {
