@@ -1,6 +1,6 @@
 # Beerpong Simulator—Dokumentation
 
-Dennis Schmidt | 2231707
+Dennis Schmidt | 2231707 <br />
 Alain Dechtjar | 2217146
 
 ## Spielprinzip
