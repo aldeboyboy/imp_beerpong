@@ -1,5 +1,8 @@
 # Beerpong Simulator—Dokumentation
 
+### Dennis Schmidt | 2231707
+### Alain Dechtjar | 2217146
+
 ## Spielprinzip
 
 Beim Beerpong Simulator wird das beliebte Trinkspiel in Virtual Reality simuliert. Meistens wird Beerpong auf einem Tisch, bzw. in unserem Fall einer Tischtennisplatte, gespielt. An diesem Tisch stehen sich zwei Spieler gegenüber und haben vor sich jeweils zehn Plastikbecher aufgereiht, die zur Hälfte mit Bier gefüllt sind. Abwechselnd wird versucht mit einem Tischtennisball in einen Becher des Gegners zu treffen. Bei einem Treffer muss der Gegner den getroffenen Becher austrinken. Gewonnen hat der Spieler, der zuerst alle Becher des Gegners getroffen hat.
